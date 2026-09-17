@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>640×360 Mobile TV Video Player</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="player-wrapper">
+    <!-- Responsive 640×360 16:9 Player Container -->
+    <div id="playerContainer" class="player-container" tabindex="0">
+      
+      <!-- Video Element -->
+      <video id="videoElement" playsinline preload="auto" poster="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=60">
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+
+      <!-- Active Channel Logo Watermark (Always visible in safe area, even during auto-hide) -->
+      <div id="channelLogoWatermark" class="channel-logo-watermark" aria-hidden="true">
+        <img id="channelLogo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/A_Sports_logo.svg/320px-A_Sports_logo.svg.png" alt="A Sports HD" onerror="this.style.display='none'">
+        <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+      </div>
+
+      <!-- Lock Indicator -->
+      <div id="lockBanner" class="lock-banner hidden" role="button" tabindex="0" aria-label="Screen Locked. Click to unlock">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Screen Locked (Click to Unlock)</span>
+      </div>
+
+      <!-- Video Controls Overlay (Fade in on touch, fade out after exact 2000ms) -->
+      <div id="controlsOverlay" class="controls-overlay">
+        
+        <!-- TOP ROW: Back + Channel Name | Top-Right Quick Icons -->
+        <div class="top-bar">
+          <div class="top-left">
+            <button id="btnBack" class="btn-glass" aria-label="Back" title="Back">
+              <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </button>
+            <div class="channel-info-pill">
+              <span id="channelNameText" class="channel-info-name">A Sports HD</span>
+              <span class="live-tag">LIVE</span>
+            </div>
+          </div>
+
+          <div class="top-right">
+            <!-- 1. Channel List -->
+            <button id="btnChannelList" class="btn-glass" aria-label="Channel list" title="Channel List">
+              <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            </button>
+            <!-- 2. Channel Grid -->
+            <button id="btnChannelGrid" class="btn-glass" aria-label="Channel grid" title="Channel Grid">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </button>
+            <!-- 3. Refresh Stream -->
+            <button id="btnRefresh" class="btn-glass" aria-label="Refresh" title="Refresh Stream">
+              <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            </button>
+            <!-- 4. Lock Screen -->
+            <button id="btnLock" class="btn-glass" aria-label="Lock screen controls" title="Lock Screen">
+              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </button>
+            <!-- 5. Display Mode -->
+            <button id="btnDisplayMode" class="btn-glass" aria-label="Display mode" title="Display Mode">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+            </button>
+            <!-- 6. Settings -->
+            <button id="btnSettings" class="btn-glass" aria-label="Settings" title="Player Settings">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- CENTER ROW: Previous, Replay 10s, Large Play/Pause, Forward 10s, Next -->
+        <div class="center-controls">
+          <button id="btnPrev" class="btn-glass" aria-label="Previous channel" title="Previous Channel">
+            <svg viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+          </button>
+          <button id="btnReplay" class="btn-glass" aria-label="Replay 10 seconds" title="Replay 10s">
+            <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+          </button>
+          <button id="btnPlayPause" class="btn-glass btn-play-pause" aria-label="Play or Pause" title="Play / Pause">
+            <svg id="playIcon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <svg id="pauseIcon" viewBox="0 0 24 24" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+          </button>
+          <button id="btnForward" class="btn-glass" aria-label="Forward 10 seconds" title="Forward 10s">
+            <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+          </button>
+          <button id="btnNext" class="btn-glass" aria-label="Next channel" title="Next Channel">
+            <svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+          </button>
+        </div>
+
+        <!-- BOTTOM ROW: Progress / Seek Bar, Volume & Fullscreen -->
+        <div class="bottom-bar">
+          <div class="progress-row">
+            <span id="currentTimeDisplay" class="time-display">00:00</span>
+            <input id="seekSlider" class="seek-slider" type="range" min="0" max="100" value="0" aria-label="Seek Video Progress">
+            <span id="durationDisplay" class="time-display">00:00</span>
+          </div>
+          <div class="bottom-actions-row">
+            <div class="volume-group">
+              <button id="btnVolume" class="btn-glass" aria-label="Volume" title="Mute/Unmute">
+                <svg id="volumeHighIcon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                <svg id="volumeMuteIcon" viewBox="0 0 24 24" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+              </button>
+              <input id="volumeSlider" class="volume-slider" type="range" min="0" max="1" step="0.05" value="1" aria-label="Volume control">
+            </div>
+
+            <div class="right-bottom-actions">
+              <button id="btnFullscreen" class="btn-glass" aria-label="Fullscreen" title="Toggle Fullscreen">
+                <svg id="fullscreenEnterIcon" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                <svg id="fullscreenExitIcon" viewBox="0 0 24 24" style="display: none;"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Settings Popup inside player -->
+      <div id="settingsPopup" class="settings-popup hidden">
+        <div class="settings-item">
+          <div>Quality</div>
+          <div class="settings-badge">Auto (1080p)</div>
+        </div>
+        <div class="settings-item">
+          <div>Aspect Ratio</div>
+          <div class="settings-badge">16:9 Contain</div>
+        </div>
+        <div class="settings-item">
+          <div>Playback Speed</div>
+          <div class="settings-badge">1.0x Normal</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

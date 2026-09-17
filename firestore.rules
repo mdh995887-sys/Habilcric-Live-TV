@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper function to check if user is an authorized admin
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.admin == true ||
+        request.auth.token.email == "mohammadhabilmia@gmail.com" ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Channels collection
+    match /channels/{channelId} {
+      // Public users can read enabled channels; admins can read all
+      allow read: if resource.data.enabled == true || isAdmin();
+      // Only authorized admins can create, update, or delete channels
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Categories collection
+    match /categories/{categoryId} {
+      // Public users can read categories
+      allow read: if true;
+      // Only authorized admins can modify categories
+      allow write: if isAdmin();
+    }
+
+    // App Settings collection
+    match /appSettings/{settingId} {
+      // Public users can read public configuration
+      allow read: if true;
+      // Only authorized admins can update settings
+      allow write: if isAdmin();
+    }
+
+    match /settings/{settingId} {
+      // Public users can read public configuration
+      allow read: if true;
+      // Only authorized admins can update settings
+      allow write: if isAdmin();
+    }
+
+    // Notifications collection
+    match /notifications/{notificationId} {
+      // Public users can read notifications
+      allow read: if resource.data.active == true || resource.data.enabled == true || isAdmin();
+      // Only admins can broadcast / write notifications
+      allow write: if isAdmin();
+    }
+
+    // Admin profiles and audit logs
+    match /admins/{adminId} {
+      // Only admins can read/write admin records
+      allow read, write: if isAdmin() || (isAuthenticated() && request.auth.uid == adminId);
+    }
+
+    // Match Schedules (Sports)
+    match /matches/{matchId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

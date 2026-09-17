@@ -1,0 +1,80 @@
+{
+  "entities": {
+    "channels": {
+      "title": "Channels",
+      "description": "Live TV and Sports broadcast streams",
+      "properties": {
+        "channelNumber": { "type": "number", "description": "Unique channel number" },
+        "name": { "type": "string", "description": "Channel display name" },
+        "bnName": { "type": "string", "description": "Channel Bengali name" },
+        "logo": { "type": "string", "description": "Channel logo image URL" },
+        "streamUrl": { "type": "string", "description": "HLS or direct video stream URL" },
+        "category": { "type": "string", "description": "Category identifier" },
+        "categoryLabel": { "type": "string", "description": "Category display label" },
+        "country": { "type": "string", "description": "Country code (BD, IN, SA, etc.)" },
+        "language": { "type": "string", "description": "Audio/Broadcast language" },
+        "resolution": { "type": "string", "description": "Stream quality resolution" },
+        "enabled": { "type": "boolean", "description": "Whether channel is published" },
+        "featured": { "type": "boolean", "description": "Whether featured on homepage" },
+        "currentShow": { "type": "string", "description": "Currently playing program" },
+        "currentShowBn": { "type": "string", "description": "Bengali current show title" },
+        "nextShow": { "type": "string", "description": "Upcoming program schedule" },
+        "nextShowBn": { "type": "string", "description": "Bengali next show title" },
+        "viewers": { "type": "number", "description": "Current viewer count estimate" }
+      },
+      "required": ["channelNumber", "name", "streamUrl", "category", "enabled"]
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Channel categories",
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "bnLabel": { "type": "string" },
+        "icon": { "type": "string" },
+        "order": { "type": "number" }
+      },
+      "required": ["id", "label"]
+    },
+    "appSettings": {
+      "title": "App Settings",
+      "description": "Global application branding and presentation configuration",
+      "properties": {
+        "appName": { "type": "string" },
+        "appLogo": { "type": "string" },
+        "favicon": { "type": "string" },
+        "splashScreen": { "type": "string" },
+        "theme": { "type": "string" },
+        "primaryColor": { "type": "string" },
+        "background": { "type": "string" },
+        "homeBanner": { "type": "string" },
+        "footerText": { "type": "string" },
+        "socialLinks": { "type": "object" }
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Live match alerts and system broadcasts",
+      "properties": {
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "image": { "type": "string" },
+        "type": { "type": "string" },
+        "active": { "type": "boolean" },
+        "scheduledFor": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "message"]
+    },
+    "admins": {
+      "title": "Admins",
+      "description": "Authorized administrator profiles",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "role"]
+    }
+  }
+}

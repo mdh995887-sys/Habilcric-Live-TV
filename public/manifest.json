@@ -1,0 +1,17 @@
+{
+  "short_name": "BD LIVE TV",
+  "name": "BD LIVE SPORTS TV",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#070b14",
+  "theme_color": "#0ea5e9",
+  "display": "standalone",
+  "orientation": "any",
+  "categories": ["sports", "entertainment", "tv"]
+}

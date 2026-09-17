@@ -1,0 +1,6 @@
+{
+  "name": "BD LIVE SPORTS TV",
+  "description": "BD LIVE SPORTS TV - High performance Live Sports & TV streaming platform with full administrative control system, real-time channel updates, HD video player, and TV navigation mode.",
+  "requestFramePermissions": ["microphone", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

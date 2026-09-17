@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150" width="300" height="150">
+  <defs>
+    <linearGradient id="bein_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b0764"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="150" rx="16" fill="url(#bein_bg)"/>
+  <text x="35" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="44" fill="#ffffff">beIN</text>
+  <text x="140" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="28" fill="#c084fc">SPORTS</text>
+  <rect x="238" y="36" width="38" height="42" rx="8" fill="#a855f7"/>
+  <text x="257" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="30" fill="#ffffff" text-anchor="middle">1</text>
+  <rect x="35" y="86" width="241" height="2" rx="1" fill="#a855f7" opacity="0.4"/>
+  <text x="150" y="110" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="12" fill="#e9d5ff" text-anchor="middle" letter-spacing="3">PREMIUM HD</text>
+</svg>

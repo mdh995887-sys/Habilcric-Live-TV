@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#091224" />
+      <stop offset="100%" stop-color="#030712" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#ef4444" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Rounded Square -->
+  <rect x="24" y="24" width="464" height="464" rx="100" fill="url(#bgGrad)" stroke="#1e293b" stroke-width="8" />
+  
+  <!-- Outer Glow Ring -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#accentGrad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="80 30" />
+  
+  <!-- TV Antenna / Signals -->
+  <path d="M190 140 L256 195 L322 140" fill="none" stroke="url(#glowGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="180" cy="130" r="10" fill="#00f2fe" />
+  <circle cx="332" cy="130" r="10" fill="#00f2fe" />
+
+  <!-- Screen Frame -->
+  <rect x="136" y="195" width="240" height="170" rx="24" fill="#0f172a" stroke="#38bdf8" stroke-width="6" />
+
+  <!-- Play Button Triangle -->
+  <path d="M235 240 L295 280 L235 320 Z" fill="url(#accentGrad)" />
+
+  <!-- BD Sports Badge -->
+  <rect x="176" y="390" width="160" height="42" rx="12" fill="#dc2626" />
+  <text x="256" y="419" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="2">BD SPORTS</text>
+  
+  <!-- Live Dot -->
+  <circle cx="346" cy="220" r="8" fill="#ef4444" />
+</svg>
